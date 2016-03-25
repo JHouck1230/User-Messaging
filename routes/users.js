@@ -22,8 +22,11 @@ router.post('/authenticate', function(req, res) {
 	});
 });
 
-router.put('/updateProfile', User.authMiddleware, function(req, res) {
+router.put('/logout', function(req, res) {
+	res.clearCookie('messageapp').send();
+})
 
+router.put('/updateProfile', User.authMiddleware, function(req, res) {
 	User.findOneAndUpdate({username: req.body.username}, req.body, function(err, user) {
 		console.log('user: ', user);
 		var userData = {

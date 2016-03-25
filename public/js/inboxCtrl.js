@@ -2,6 +2,6 @@
 
 var app = angular.module('userMess');
 
-app.controller('inboxCtrl', function($scope, $state, UserService) {
+app.controller('inboxCtrl', function($scope, UserService) {
 
 });
