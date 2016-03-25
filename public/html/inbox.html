@@ -1,1 +1,17 @@
+<nav class="navbar navbar-default" ng-controller='navbarCtrl'>
+  <h1 class='col-sm-6 col-sm-offset-5'>U-Message</h1>
+	<div class="row">
+		<div class="col-sm-11">
+			<ul class="nav nav-tabs">
+			  <li role="presentation" class="active"><a ui-sref='inbox'>Inbox</a></li>
+			  <li role="presentation"><a ui-sref='compose'>Compose</a></li>
+			  <li role="presentation"><a ui-sref='profile'>Profile</a></li>
+			</ul>
+		</div>
+		<div class="col-sm-1">
+			<button class='btn' ng-click='logout(user)'>Logout</button>
+		</div>
+	</div>
+</nav>
 <h1>Inbox</h1>
+
