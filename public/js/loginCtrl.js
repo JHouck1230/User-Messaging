@@ -3,19 +3,22 @@
 var app = angular.module('userMess');
 
 app.controller('loginCtrl', function($scope, $state, UserService) {
-	$scope.login = function(user) {
+	$scope.login = user => {
 		UserService.login(user)
-		.then(res => {
-			$state.go('inbox')
-			console.log('res: ', res);
-		}, err => console.error(err))
-	}
+		.then(res => $state.go('inbox'),
+			err => {
+				$state.go('login');
+				console.error(err);
+		});
+	};
 
-	$scope.register = function(user) {
+	$scope.register = user => {
 		UserService.register(user)
-		.then(res => {
-			console.log('res: ', res);
-		}, err => console.error(err))
+		.then(res => $state.go('inbox'), 
+			err => {
+				$state.go('login');
+				console.error(err);
+		});
 	};
 
 });

@@ -10,10 +10,21 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		controller: 'loginCtrl'
 	})
 	.state('inbox', {
-		url: '/',
+		url: '/inbox',
 		templateUrl: 'html/inbox.html',
 		controller: 'inboxCtrl'
+	})
+	.state('compose', {
+		url: '/compose',
+		templateUrl: 'html/compose.html',
+		controller: 'composeCtrl'
+	})
+	.state('profile', {
+		url: '/profile',
+		templateUrl: 'html/profile.html',
+		controller: 'profileCtrl'
 	})
 
 	$urlRouterProvider.otherwise('/');
 });
+

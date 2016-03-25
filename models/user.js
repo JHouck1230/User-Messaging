@@ -10,20 +10,24 @@ var User;
 
 var userSchema = new mongoose.Schema({
 	username: { type: String, unique: true, required: true },
-	password: { type: String, required: true }
+	password: { type: String, required: true },
+	image: String,
+	email: String,
+	phone: String
 });
 
-userSchema.statics.authMiddleware = function(req, res, next) {
-	var token = req.cookies.messageapp
-	try {
-		var payload = jwt.decode(token, JWT_SECRET);
-	} catch(e) {
-		return res.clearCookie('messageapp').status(401).send("Unauthorized!");
-	}
-	User.findById(payload.userId, function(err, user) {
-		if(err || !user) return res.clearCookie('messageapp').status(400).send(err);
-		req.user = user;
-		next();
+userSchema.statics.register = function(userObj, hollaback) {
+	console.log('user.register');
+	User.findOne({username: userObj.username}, function(err, user) {
+		bcrypt.hash(userObj.password, 10, function(err, hash) {
+			if(err) return hollaback(err);
+			User.create({
+				username: userObj.username,
+				password: hash
+			}, function(err) {
+				hollaback(err);
+			});
+		});
 	});
 };
 
@@ -42,17 +46,17 @@ userSchema.statics.authenticate = function(userObj, hollaback) {
 	});
 };
 
-userSchema.statics.register = function(userObj, hollaback) {
-	User.findOne({username: userObj.username}, function(err, user) {
-		bcrypt.hash(userObj.password, 10, function(err, hash) {
-			if(err) return hollaback(err);
-			User.create({
-				username: userObj.username,
-				password: hash
-			}, function(err) {
-				hollaback(err);
-			});
-		});
+userSchema.statics.authMiddleware = function(req, res, next) {
+	var token = req.cookies.messageapp
+	try {
+		var payload = jwt.decode(token, JWT_SECRET);
+	} catch(e) {
+		return res.clearCookie('messageapp').status(401).send("Unauthorized!");
+	}
+	User.findById(payload.userId, function(err, user) {
+		if(err || !user) return res.clearCookie('messageapp').status(400).send(err);
+		req.user = user;
+		next();
 	});
 };
 
