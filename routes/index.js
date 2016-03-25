@@ -10,7 +10,13 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/protected', User.authMiddleware, function(req, res) {
-	res.send();
+		var userData = {
+			username: req.user.username,
+			image: req.user.image,
+			email: req.user.email,
+			phone: req.user.phone
+		};
+	res.send(userData);
 });
 
 module.exports = router;

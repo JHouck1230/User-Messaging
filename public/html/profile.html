@@ -2,8 +2,16 @@
 	<navbar></navbar>
 	<h1>Edit Profile</h1>
 	<div class="row">
-		<div class="col-sm-4">
-			<form name='profileForm' ng-submit='updateProfile(user)'>
+		<div class="col-sm-2">
+			<div ng-hide='userEditing'>
+				<ul class="list-group">
+				  <li class="list-group-item">{{user.email}}</li>
+				  <li class="list-group-item">{{user.phone}}</li>
+				</ul>
+			  <button ng-click='editUser()' class="btn btn-warning">Edit Info</button>
+			</div>
+
+			<form ng-show='userEditing' name='profileForm' ng-submit='updateProfile(user)'>
 			  <div class="form-group">
 			    <input id='userImage' type="text" class='form-control' ng-model='user.image' placeholder="Photograph URL">
 			    <input type="email" ng-model='user.email' class="form-control" id="userEmail" placeholder="Email@Address.com">

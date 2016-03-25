@@ -23,8 +23,29 @@ router.post('/authenticate', function(req, res) {
 });
 
 router.put('/updateProfile', User.authMiddleware, function(req, res) {
-	User.findByIdAndUpdate(req.body._id, req.body, function(err, user) {
-		res.status(err ? 400 : 200).send(err || user);
+
+	User.findOneAndUpdate({username: req.body.username}, req.body, function(err, user) {
+		console.log('user: ', user);
+		var userData = {
+			username: user.username,
+			image: user.image,
+			email: user.email,
+			phone: user.phone
+		};
+		res.status(err ? 400 : 200).send(err || userData);
+	});
+});
+
+router.put('/getInformation', User.authMiddleware, function(req, res) {
+	User.findOne({username: req.body.username}, function(err, user) {
+		if(err) return res.status(400).send(err);
+		var userData = {
+			username: user.username,
+			image: user.image,
+			email: user.email,
+			phone: user.phone
+		};
+		res.send(userData);
 	});
 });
 

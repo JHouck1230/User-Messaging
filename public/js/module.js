@@ -28,3 +28,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	$urlRouterProvider.otherwise('/');
 });
 
+app.run(function($http, $state, UserService) {
+	$http.get('/protected')
+	.then(res => {
+		UserService.cookieUser(res.data);
+		$state.go('inbox');
+	}, err => console.error(err));
+});
