@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "setup": "npm i && bower i",
-    "start": "node ./bin/www",
-    "postinstall": "bower i"
+    "start": "node ./bin/www"
   },
   "engines": {
     "node": "4.3.1"
