@@ -1,0 +1,24 @@
+{
+  "name": "22day",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Josh Houck <Josh123090@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/JHouck1230/User-Messaging",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "angular-ui-router": "^0.2.18",
+    "angular": "^1.5.3"
+  }
+}
