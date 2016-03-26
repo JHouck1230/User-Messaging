@@ -15,6 +15,7 @@ app.controller('loginCtrl', function($scope, $state, UserService) {
 	}
 
 	$scope.register = function(user) {
+		if(user.password !== user.confirmPass) return;
 		UserService.register(user)
 		.then(res => {
 			UserService.passUser(user)
