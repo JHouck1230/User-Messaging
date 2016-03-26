@@ -53,7 +53,7 @@ userSchema.statics.authMiddleware = function(req, res, next) {
 	} catch(e) {
 		return res.clearCookie('messageapp').status(401).send("Unauthorized!");
 	}
-	User.findById(payload.userId, function(err, user) {
+	User.findById(payload.userId).select({password: 0}).exec(function(err, user) {
 		if(err || !user) return res.clearCookie('messageapp').status(400).send(err);
 		req.user = user;
 		next();

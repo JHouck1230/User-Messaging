@@ -5,8 +5,10 @@ var router = express.Router();
 
 var User = require('../models/user');
 
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+router.get('/recipients', User.authMiddleware, function(req, res, next) {
+  User.find({_id: {$ne: req.user._id}}, function(err, users) {
+    res.status(err ? 400 : 200).send(err || users);
+  }).select('username');
 });
 
 router.post('/register', function(req, res) {

@@ -1,16 +1,28 @@
-<nav class="navbar navbar-default" ng-controller='navbarCtrl'>
-  <h1 class='col-sm-6 col-sm-offset-5'>U-Message</h1>
-	<div class="row">
-		<div class="col-sm-11">
-			<ul class="nav nav-tabs">
-			  <li role="presentation" class="active"><a ui-sref='inbox'>Inbox</a></li>
-			  <li role="presentation"><a ui-sref='compose'>Compose</a></li>
-			  <li role="presentation"><a ui-sref='profile'>Profile</a></li>
-			</ul>
+<div class="container-fluid">
+	<nav class="navbar navbar-default" ng-controller='navbarCtrl'>
+	  <h1 class='col-sm-6 col-sm-offset-5'>U-Message</h1>
+		<div class="row">
+			<div class="col-sm-11">
+				<ul class="nav nav-tabs">
+				  <li role="presentation"><a ui-sref='inbox'>Inbox</a></li>
+				  <li role="presentation"><a ui-sref='compose'>Compose</a></li>
+				  <li role="presentation"><a ui-sref='profile'>Profile</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-1">
+				<button class='btn' ng-click='logout(user)'>Logout</button>
+			</div>
 		</div>
-		<div class="col-sm-1">
-			<button class='btn' ng-click='logout(user)'>Logout</button>
-		</div>
-	</div>
-</nav>
-<h1>compose</h1>
+	</nav>
+	<h1>compose</h1>
+	<form name='messageForm' ng-submit='send(message)'>
+		<select name="recipient" id="recipient" required ng-options='user.username for user in users' ng-model='message.receiver'></select>
+		<br>
+		<br>
+		<input placeholder='Subject Line' type="text" ng-model='message.subject'>
+		<br>
+		<textarea placeholder="Type your message here." name="body" id="" cols="50" rows="10" ng-model='message.body'></textarea>
+		<br>
+		<button class='btn btn-primary' type='submit'>Send</button>
+	</form>
+</div>

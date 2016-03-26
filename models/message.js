@@ -9,6 +9,7 @@ var Message;
 var messageSchema = new mongoose.Schema({
 	sender: { type: String, required: true },
 	receiver: { type: String, required: true },
+	subject: {type: String, required: true},
 	body: { type: String, required: true }
 });
 
